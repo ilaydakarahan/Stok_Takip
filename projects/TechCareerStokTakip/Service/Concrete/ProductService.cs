@@ -6,6 +6,7 @@ using Models.Dtos.ResponseDto;
 using Models.Entities;
 using Service.Abstract;
 using Service.BusinessRules;
+using Service.BusinessRules.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,11 @@ namespace Service.Concrete;
 public class ProductService : IProductService
 {
     private readonly IProductRepository _productRepository;
-    private readonly ProductRules _rules;   //oluşturulan concreate nesnesinin IoD kaydı için servicedependencies'e eklenir
+    private readonly IProductRules _rules;   
+    //oluşturulan concreate nesnesinin IoD kaydı için servicedependencies'e eklenir
     //Servisle alakalı yazdığımız kurallar(businessrule) buraya eklenmesi,yukarıdaki gibi
 
-    public ProductService(IProductRepository productRepository, ProductRules rules)
+    public ProductService(IProductRepository productRepository, IProductRules rules)
     {
         _productRepository = productRepository;
         _rules = rules;
@@ -43,7 +45,7 @@ public class ProductService : IProductService
             return new Response<ProductResponseDto>()
             {
                 Data = data,
-                Message = "Ürün Eklendi.",
+                Message = "Ürün Eklendi",
                 StatusCode = System.Net.HttpStatusCode.Created
             };
         }

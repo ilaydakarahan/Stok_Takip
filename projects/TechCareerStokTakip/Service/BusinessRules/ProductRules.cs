@@ -2,10 +2,11 @@
 
 using Core.CrossCuttingConcerns.Exceptions;
 using DataAccess.Repositories.Abstracts;
+using Service.BusinessRules.Abstract;
 
 namespace Service.BusinessRules;
 
-public class ProductRules
+public class ProductRules : IProductRules
 {
     private readonly IProductRepository _productrepository;
 
